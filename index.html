@@ -26,7 +26,8 @@
         <a href="./index.html" class="logo">
             <img src="./assets/images/logos.png" width="50" height="22" alt="Filmflix home">
         </a>
-
+        <!-- <a href="./sign-log-in/sign.html" class="btn-login"><span>Sign In</span></a> -->
+        <button id="tog" onclick="theme()"><img src="./assets/images/toggle.png" width="50"></button>
         <div class="search-box" search-box>
             <div class="search-wrapper" search-wrapper>
                 <input type="text" name="search" aria-label="search movies" placeholder="Search any movies..." class="search-field" autocomplete="off" search-field>
@@ -54,5 +55,14 @@
         <article class="container" page-content></article>
     </main>
 </body>
+<script>
+    function theme() {
+        console.log("toggle");
+        var element = document.body;
+        var el = document.main;
+        element.classList.toggle("dark-mode");
+        el.classList.toggle("dark-mode");
+    }
+</script>
 
 </html>

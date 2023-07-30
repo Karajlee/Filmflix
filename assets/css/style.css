@@ -1,3 +1,10 @@
+.dark-mode {
+  background-color: rgb(255, 255, 255);
+  color: white;
+}
+#tog {
+  background-color: white;
+}
 /* custom property */
 :root {
   /* colors */
@@ -332,6 +339,7 @@ body {
 .search-btn,
 .menu-btn {
   padding: 12px;
+  background-color: red;
 }
 
 .search-btn {
@@ -524,6 +532,19 @@ body {
   z-index: 1;
 }
 
+/* login */
+.btn-login {
+  font-size: var(--fs-button);
+  font-weight: var(--weight-bold);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+  padding: 10px 20px;
+  background-color: var(--primary);
+  border-radius: var(--radius-8);
+  transition: var(--transition-short);
+}
 
 /* banner */
 .banner {
