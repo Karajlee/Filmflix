@@ -69,7 +69,7 @@
                         <div class="row">
                             <h1 class="col-12 mt-4 mb-4">Logout</h1>
                             <div class="col-12">You are logged out.</div>
-                            <div class="col-12 mt-3">Click <a href="login.php">here</a> to login again.</div>
+                            <div class="col-12 mt-3">Click <a href="index.php">here</a> to login again.</div>
                          </div> 
                     </div>
                 </div> 

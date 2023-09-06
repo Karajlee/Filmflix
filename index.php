@@ -11,48 +11,35 @@
 		echo $mysqli->connect_error;
 		exit();
 	}
-    // echo "hello";
 	$mysqli->set_charset('utf8');
     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
 		header("Location: home.php");
 	}
-    if (isset($_POST['sign-up'])) {;
+    if (isset($_POST['login'])) {
         if (isset($_POST['email']) && isset($_POST['password'])) {
-            if (empty(trim($_POST['email'])) && empty(trim($_POST['password']))) {
+            $sql = "SELECT users.name FROM users WHERE users.name = '" . $_POST['email'] . "' AND users.passwords ='" . $_POST['password'] . "'";
+            $sql = $sql. ";";
+            $results = $mysqli->query($sql);
+            if ( !$results ) {
+                echo $mysqli->error;
+                $mysqli->close();
+                exit();
+            }
+            if (empty(trim($_POST['email'])) || empty(trim($_POST['password']))) {
                 $error = "Please enter email and password.";
-            } 
-            else if (empty(trim($_POST['email'])) && !empty(trim($_POST['password']))) {
-                $error = "Please enter email";
-            } 
-            else if (!empty(trim($_POST['email'])) && empty(trim($_POST['password']))) {
-                $error = "Please enter password";
-            } 
-            else {
-                $sqlCheck = "SELECT * FROM filmflix.users WHERE name = '{$_POST['email']}' OR passwords = '{$_POST['password']}'";
-                $sqlCheck = $sqlCheck. ";";
-                $resultCheck = $mysqli->query($sqlCheck);
-                if($resultCheck->num_rows > 0){
-                    $error = "Please use a different email or password.";
-                }
-                else{
-                    $sql = "INSERT INTO users (name, passwords) VALUES ('" . $_POST['email'] . "','" . $_POST['password'] . "')";
-                    $sql = $sql. ";";
-                    $results = $mysqli->query($sql);
-                    if ( !$results ) {
-                        echo $mysqli->error;
-                        $mysqli->close();
-                        exit();
-                    }
-                    $_SESSION['logged_in'] = true;
-                    $_SESSION['email'] = $_POST['email'];
-                    header("Location: home.php");
-                }
-            } 
+            } elseif ( $results->num_rows > 0) {
+                $_SESSION['logged_in'] = true;
+                $_SESSION['email'] = $_POST['email'];
+                header("Location: home.php");
+            } else {
+                $error = "Invalid email or password.";
+            }
+
         }
     }
     $mysqli->close();
  ?>
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -73,7 +60,7 @@
 
     <style>
 
-a {
+        a {
             color: #fff;
             text-decoration: none;
         }
@@ -117,6 +104,7 @@ a {
         }
 
         .btn-primary {
+
             height: 50px;
             border-radius: 5px;
             background: red;
@@ -149,6 +137,7 @@ a {
         .signup p {
             margin-right: 15px;
         }
+        
     </style>
 </head>
 
@@ -162,8 +151,8 @@ a {
     <header class="showcase">
         <div class="showcase-content">
             <div class="formm">
-                <form id="sign-in" action = "sign.php" method="POST">
-                <h1>Sign Up</h1>
+                <form id="sign-in" action = "index.php" method="POST">
+                    <h1>Sign In</h1>
                     <div class="info form-group">
                         <label for="email">Email</label>
                         <input class="box" type="email" id="email" placeholder="Email" name="email"> 
@@ -172,7 +161,7 @@ a {
                         <input class="box" type="password" id="password" placeholder="Password" name="password">
                         <small id="password-error" class="form-text text-danger"></small>
                     </div>
-                    <button role="button" type="submit" class="btn btn-primary" name="sign-up">Sign Up</button>
+                    <button role="button" type="submit" class="btn btn-primary" name="login">Login</button>
                     <div class="font-italic text-danger ml-sm-auto">
                         <?php 
                             if (!empty($error)) {
@@ -183,9 +172,9 @@ a {
                 </form>
             </div>
             <div class="signup">
-                <p>Existing User?</p>
+                <p>New User?</p>
                 <p>
-                    <a href="index.php">Log In</a>
+                    <a href="sign.php">Sign up</a>
                 </p>
             </div>
         </div>
@@ -194,3 +183,4 @@ a {
 </body>
 
 </html>
+
