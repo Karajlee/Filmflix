@@ -22,18 +22,6 @@ export function sidebar () {
         <div class="sidebar-list">
             <p class="title">Genre</p>
 
-            <a href="./movie-list.html" menu-close class="sidebar-link">Action</a>
-
-            <a href="./movie-list.html" menu-close class="sidebar-link">Horror</a>
-
-            <a href="./movie-list.html" menu-close class="sidebar-link">Comedy</a>
-
-            <a href="./movie-list.html" menu-close class="sidebar-link">Adventure</a>
-
-            <a href="./movie-list.html" menu-close class="sidebar-link">Drama</a>
-
-            <a href="./movie-list.html" menu-close class="sidebar-link">Sci-Fi</a>
-
         </div>
 
         <div class="sidebar-list">
